@@ -59,11 +59,11 @@ def get_equation(unit):
     return equation
 
 
-image_path = r"D:\tech\programming language\equation solver\static\sample\sample4.png"
+# image_path = r"D:\tech\programming language\equation solver\static\sample\sample4.png"
 
-with open(image_path, "rb") as image_file:
-    thresh, characters = preprocess_equation(image_file)
+# with open(image_path, "rb") as image_file:
+#     thresh, characters = preprocess_equation(image_file)
 
-equation = get_equation(characters)
+# equation = get_equation(characters)
 
-print("Equation:", equation)
+# print("Equation:", equation)
