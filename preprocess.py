@@ -1,6 +1,6 @@
 import cv2
 import numpy as np
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 
 def overlap(a1, a2, b1, b2):
     # Length of overlap between two 1D ranges.
