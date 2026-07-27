@@ -1,7 +1,6 @@
 import os
-import matplotlib.pyplot as plt
-from keras.layers import Dense,MaxPool2D,Conv2D,Input,Layer, Flatten, BatchNormalization, Dropout, GlobalAveragePooling2D
-from keras.regularizers import l1
+# import matplotlib.pyplot as plt
+from keras.layers import Dense, Dropout, GlobalAveragePooling2D
 from keras import Sequential
 from keras.utils import image_dataset_from_directory
 from keras.applications import EfficientNetB0
