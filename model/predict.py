@@ -16,7 +16,7 @@ from preprocess import preprocess_equation
 
 # os.system("cls")
 
-path = "D:\\tech\\programming language\\equation solver\\model\\model.keras"
+path = os.path.join(os.path.dirname(__file__), "model.keras")
 model = tf.keras.models.load_model(path, compile=False)
 model.trainable = False
 
