@@ -2,11 +2,11 @@ import os
 import sys
 import cv2
 import numpy as np
-import tensorflow as tf
+# import tensorflow as tf
 from keras.models import load_model
 from keras.preprocessing import image
 from keras.applications.efficientnet import preprocess_input
-from keras.utils import image_dataset_from_directory
+# from keras.utils import image_dataset_from_directory
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
@@ -15,9 +15,9 @@ from preprocess import preprocess_equation
 
 
 # os.system("cls")
-
-path = os.path.join(os.path.dirname(__file__), "model.keras")
-model = tf.keras.models.load_model(path, compile=False)
+current_dir = os.path.dirname(os.path.abspath(__file__))
+path = os.path.join(current_dir, "model.keras")
+model = load_model(path, compile=False)
 model.trainable = False
 
 
@@ -25,14 +25,17 @@ value = {'cap A' : "A", 'cap Y' : "Y", 'cap Z' : "Z", 'decimal' : ".", 'divide' 
         'five' : "5", 'four' : "4", 'minus' : "-", 'multiply' : "*", 'nine' : "9", 'one' : "1", 'plus' : "+", 'seven' : "7",
         'six' : "6", 'small a' : "a", 'small y' : "y", 'small z' : "z", 'three' : "3", 'two' : "2", 'zero' : "0"}
 
-def get_folder_name():
-    class_oder = image_dataset_from_directory(
-        "D:\\tech\\programming language\\equation solver\\dataset\\data_aug",
-        image_size=(224,224),
-        batch_size=32
-    )
+# def get_folder_name():
+#     class_oder = image_dataset_from_directory(
+#         "D:\\tech\\programming language\\equation solver\\dataset\\data_aug",
+#         image_size=(224,224),
+#         batch_size=32
+#     )
 
-    return class_oder.class_names
+#     return class_oder.class_names
+
+folders = ['cap A', 'cap Y', 'cap Z', 'decimal', 'divide', 'eight', 'equal', 'five','four', 'minus', 'multiply', 'nine',
+            'one', 'plus', 'seven','six', 'small a', 'small y', 'small z', 'three', 'two', 'zero']
 
 
 def get_equation(unit):
@@ -51,16 +54,16 @@ def get_equation(unit):
         prediction = model.predict(img_array)
 
         predicted_class = np.argmax(prediction)
-        equation += value[get_folder_name()[predicted_class]]
+        equation += value[folders[predicted_class]]
 
     return equation
 
 
-# image_path = r"C:\Users\Aryan kumar\OneDrive\Pictures\Screenshots\Screenshot 2026-07-27 183231.png"
+image_path = r"D:\tech\programming language\equation solver\static\sample\sample4.png"
 
-# with open(image_path, "rb") as image_file:
-#     thresh, characters = preprocess_equation(image_file)
+with open(image_path, "rb") as image_file:
+    thresh, characters = preprocess_equation(image_file)
 
-# equation = get_equation(characters)
+equation = get_equation(characters)
 
-# print("Equation:", equation)
+print("Equation:", equation)
