@@ -5,3 +5,4 @@ tensorflow==2.20.0
 keras==3.13.2
 sympy==1.14.0
 opencv-python==4.11.0.86
+gunicorn==23.0.0
