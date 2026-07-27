@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Equation Solver</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+
+    <input type="checkbox" id="menu-toggle">
+    <label for="menu-toggle" class="menu-btn">&#9776;</label>
+    <div class="sidebar">
+
+        <label for="menu-toggle" class="close-btn">&times;</label>
+        <h2>Sample Inputs</h2>
+
+        <form action="/" method="POST">
+            <button type="submit" name="sample_image" value="sample1.png">Sample 1</button>
+            <button type="submit" name="sample_image" value="sample2.png">Sample 2</button>
+            <button type="submit" name="sample_image" value="sample3.png">Sample 3</button>
+            <button type="submit" name="sample_image" value="sample4.png">Sample 4</button>
+            <input type="hidden" name="action" value="sample_preview">
+        </form>
+    </div>
+
+    <div class="container">
+
+        <form action="/" method="POST" enctype="multipart/form-data">
+            <div class="upload-box">
+                <img src="{{ url_for('static', filename='upload.png') }}">
+                <input type="file" name="image">
+            </div>
+
+            <button type="submit" name="action" value="preview">Show Image Preview</button>
+        </form>
+
+        <p class="instruction">
+            Upload a handwritten equation containing only the following symbols:<br>
+            Variables: <b>a, A, x, X, y, Y</b><br>
+            Operators: <b>+, −, ×, ÷, =</b><br><br>
+            <b>
+                NOTE : Upload equation on blank paper with proper space between two items.<br>
+                NOTE : Use × between number and variable/bracket.
+            </b>
+        </p>
+
+        <h2 id="img_pre">Image Preview</h2>
+
+        <div class="preview">
+            {% if thresh_data %}
+                <img src="data:image/png;base64,{{ thresh_data }}" alt="Threshold Image">
+            {% elif image_data %}
+                <img src="data:image/png;base64,{{ image_data }}" alt="Uploaded Image">
+            {% endif %}
+        </div>
+
+        <form action="/" method="POST">
+            <button type="submit" name="action" value="solve">Solve Equation</button>
+        </form>
+
+        <div class="result">
+
+            {% if result is not none %}
+                {% if result is number %}
+                    <h2>Detected Equation</h2>
+                    <p>{{ equation }}</p>
+                    <h2>Solution</h2>
+                    <p>{{ result }}</p>
+
+                {% elif result is string %}
+                    <h2>Message</h2>
+                    <p>{{ result }}</p>
+
+                {% elif result is sequence and result is not string %}
+                    <h2>Detected Equation</h2>
+                    <p>{{ result[0] }}</p>
+                    <h2>Solution</h2>
+                    <p>{{ result[1] }}</p>
+                    
+                {% endif %}
+            {% endif %}
+
+        </div>
+    </div>
+</body>
+</html>
