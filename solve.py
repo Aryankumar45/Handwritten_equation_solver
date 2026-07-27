@@ -1,4 +1,4 @@
-import os
+# import os
 from sympy import symbols, Eq, solve, sympify
 
 # os.system("cls")
