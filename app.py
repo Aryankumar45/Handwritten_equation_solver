@@ -6,7 +6,7 @@ import base64
 import cv2
 import os
 
-os.system("cls")
+# os.system("cls")
 app = Flask(__name__)
 
 TEMP_IMAGE = "static/temp.png"
